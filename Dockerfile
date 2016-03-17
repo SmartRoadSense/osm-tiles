@@ -52,3 +52,8 @@ RUN cd /usr/share/mapnik-osm-carto-data/land-polygons-split-3857/ && \
     cd /opt/osm-bright-master/OSMBright/ && \
       carto project.mml > OSMBright.xml && \
     a2enconf mod_tile
+
+RUN mkdir -p /run /var/log/apache2 && \
+  chown www-data: -R /run /var/log/apache2
+USER www-data
+WORKDIR /tmp
