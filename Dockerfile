@@ -40,6 +40,7 @@ COPY renderd.conf /etc/
 COPY configure.py /opt/osm-bright-master/
 COPY osm-bright.osm2pgsql.mml /opt/osm-bright-master/osm-bright/
 COPY apache_site.conf /etc/apache2/sites-available/tileserver_site.conf
+COPY apache2.conf /etc/apache2/apache2.conf
 COPY apache_ports.conf /etc/apache2/ports.conf
 COPY mod_tile.conf /etc/apache2/conf-available/
 COPY supervisord.conf /etc/supervisor/
@@ -52,3 +53,8 @@ RUN cd /usr/share/mapnik-osm-carto-data/land-polygons-split-3857/ && \
     cd /opt/osm-bright-master/OSMBright/ && \
       carto project.mml > OSMBright.xml && \
     a2enconf mod_tile
+
+RUN mkdir -p /run /var/log/apache2 && \
+  chown www-data: -R /run /var/log/apache2
+USER www-data
+WORKDIR /tmp
