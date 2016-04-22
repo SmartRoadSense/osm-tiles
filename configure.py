@@ -18,7 +18,7 @@ config["path"] = "/opt/osm-bright-master"
 
 # PostGIS connection setup
 # Leave empty for Mapnik defaults. The only required parameter is dbname.
-config["postgis"]["host"]     = getenv("OSM_DB_HOST", "osm_db")
+config["postgis"]["host"]     = getenv("OSM_DB_HOST", "osm-db")
 config["postgis"]["port"]     = getenv("OSM_DB_PORT", "")
 config["postgis"]["dbname"]   = getenv("OSM_DB_NAME", "srs_osm_db")
 config["postgis"]["user"]     = getenv("OSM_DB_USER", "srs_rw_user")
