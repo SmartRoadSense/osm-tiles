@@ -25,12 +25,16 @@ RUN apt update && \
 
 ENV APACHE_RUN_USER=www-data \
     APACHE_RUN_GROUP=www-data \
-    APACHE_LOG_DIR=/var/log/apache2 \
-    APACHE_PID_FILE=/var/run/apache2.pid \
-    APACHE_RUN_DIR=/var/run/apache2 \
-    APACHE_LOCK_DIR=/var/lock/apache2 \
+    APACHE_LOG_DIR=/tmp/log/apache2 \
+    APACHE_PID_FILE=/tmp/apache2.pid \
+    APACHE_RUN_DIR=/tmp/run/apache2 \
+    APACHE_LOCK_DIR=/tmp/lock/apache2 \
     APACHE_SERVERADMIN=admin@localhost \
     APACHE_SERVERNAME=localhost
+
+RUN mkdir -p ${APACHE_LOCK_DIR} ${APACHE_RUN_DIR} ${APACHE_LOG_DIR} && \
+    chmod 777 -R ${APACHE_LOCK_DIR} ${APACHE_RUN_DIR} ${APACHE_LOG_DIR}
+
 EXPOSE 8000
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
