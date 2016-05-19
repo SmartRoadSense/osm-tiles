@@ -56,12 +56,12 @@ RUN cd /usr/share/mapnik-osm-carto-data/land-polygons-split-3857/ && \
       ./make.py && \
     cd /opt/osm-bright-master/OSMBright/ && \
       carto project.mml > OSMBright.xml && \
+    chmod -R 777 /opt/osm-bright-master && \
     a2enconf mod_tile
 
 RUN mkdir -p /run /var/log/apache2 && \
   chown www-data: -R /run /var/log/apache2
 
-RUN chmod -R 777 /opt/osm-bright-master
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
