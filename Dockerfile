@@ -60,5 +60,9 @@ RUN cd /usr/share/mapnik-osm-carto-data/land-polygons-split-3857/ && \
 
 RUN mkdir -p /run /var/log/apache2 && \
   chown www-data: -R /run /var/log/apache2
+
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 USER www-data
 WORKDIR /tmp
